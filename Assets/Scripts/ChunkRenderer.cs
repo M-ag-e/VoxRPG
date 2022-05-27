@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshCollider))]
-
 public class ChunkRenderer : MonoBehaviour
 {
     MeshFilter meshFilter;
@@ -36,12 +35,12 @@ public class ChunkRenderer : MonoBehaviour
         mesh = meshFilter.mesh;
     }
 
-    public void InitalizeOnChunk(ChunkData data)
+    public void InitializeChunk(ChunkData data)
     {
         this.ChunkData = data;
     }
 
-    void RenderMesh(MeshData meshData)
+    private void RenderMesh(MeshData meshData)
     {
         mesh.Clear();
 
@@ -72,24 +71,22 @@ public class ChunkRenderer : MonoBehaviour
     {
         RenderMesh(data);
     }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-      if (showGizmo)
+        if (showGizmo)
         {
             if (Application.isPlaying && ChunkData != null)
             {
                 if (Selection.activeObject == gameObject)
-                {
                     Gizmos.color = new Color(0, 1, 0, 0.4f);
-                }
-                else 
-                {
+                else
                     Gizmos.color = new Color(1, 0, 1, 0.4f);
-                }
+
                 Gizmos.DrawCube(transform.position + new Vector3(ChunkData.chunkSize / 2f, ChunkData.chunkHeight / 2f, ChunkData.chunkSize / 2f), new Vector3(ChunkData.chunkSize, ChunkData.chunkHeight, ChunkData.chunkSize));
             }
-        }  
+        }
     }
 #endif
 }
