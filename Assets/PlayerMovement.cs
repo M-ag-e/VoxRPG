@@ -14,22 +14,26 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public static bool isGrounded;
     public static bool isDodging;
-
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
 
+    public float rayDistance;
+
     private float leanAmount;
 
     // Update is called once per frame
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
         
         //jump
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, rayDistance, groundMask);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -66,5 +70,10 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
         }
+     
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, Vector3.down * rayDistance);
     }
 }

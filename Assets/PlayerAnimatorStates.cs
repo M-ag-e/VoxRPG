@@ -17,13 +17,14 @@ public class PlayerAnimatorStates : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 horizontalVelocity = new Vector3(player.velocity.x, 0, player.velocity.z);
         px = Input.GetAxis("Horizontal");
         pz = Input.GetAxis("Vertical");
         //Animation State Machine
         if (PlayerMovement.isGrounded)
         {
             isInAir = false;
-            if (px >= moveThreshold || px <= -moveThreshold || pz >= moveThreshold || pz <= -moveThreshold)
+            if (horizontalVelocity.x > 0.01 || horizontalVelocity.x < -0.01 || horizontalVelocity.y > 0.01 || horizontalVelocity.y < -0.01)
             {
                 isMove = true;
             }
