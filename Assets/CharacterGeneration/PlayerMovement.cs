@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float rayDistance;
 
-    private float leanAmount;
+
 
     // Update is called once per frame
 
@@ -31,7 +31,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        
+        // Do lean amount in the update function, so that its calculated when the player moves
+
+
         //jump
         isGrounded = Physics.Raycast(transform.position, Vector3.down, rayDistance, groundMask);
         if (isGrounded && velocity.y < 0)
@@ -60,11 +62,8 @@ public class PlayerMovement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            
-            leanAmount = controller.velocity.magnitude;
-            leanAmount = Mathf.Clamp(leanAmount, -5, 5);
 
-            transform.rotation = Quaternion.Euler((Mathf.Atan2(direction.x,direction.y)), angle, leanAmount); //last value
+            transform.rotation = Quaternion.Euler((Mathf.Atan2(direction.x,direction.y)), angle, 0f);   // Make sure to change the 0f to the leanvalue, youll thank me later ;)
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
