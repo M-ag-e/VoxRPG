@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 310931861}
   - component: {fileID: 310931862}
   - component: {fileID: 310931863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BiomeGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542078432}
   - component: {fileID: 542078431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UndergroundLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606371338}
   - component: {fileID: 606371337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SurfaceLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 741994725}
   - component: {fileID: 741994724}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TerrainGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,6 +755,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1185861928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185861930}
+  - component: {fileID: 1185861929}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1185861929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185861928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26220d45e438fd3488401ed3e2f9c6e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
+  currentPlayerChunkPosition: {x: 0, y: 0, z: 0}
+  world: {fileID: 0}
+  dectectionTime: 1
+  cameraVM: {fileID: 0}
+--- !u!4 &1185861930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185861928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.3009734, y: 4.3532104, z: -0.39654398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1231488331
 GameObject:
@@ -1051,7 +1100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1540868312}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AdditionalLayers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1084,7 +1133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870165836}
   - component: {fileID: 1870165835}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AirLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,7 +1178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039806468}
   - component: {fileID: 2039806467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WaterLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1175,7 +1224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139441995}
   - component: {fileID: 2139441994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StoneLayers
   m_TagString: Untagged
   m_Icon: {fileID: 0}

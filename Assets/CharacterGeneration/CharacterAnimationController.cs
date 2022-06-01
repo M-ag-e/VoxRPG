@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimatorStates : MonoBehaviour
+public class CharacterAnimationController : MonoBehaviour
 {
     public CharacterController player;
     public Animator anim;
@@ -24,7 +24,7 @@ public class PlayerAnimatorStates : MonoBehaviour
         if (PlayerMovement.isGrounded)
         {
             isInAir = false;
-            if (horizontalVelocity.x > 0.01 || horizontalVelocity.x < -0.01 || horizontalVelocity.y > 0.01 || horizontalVelocity.y < -0.01)
+            if ((horizontalVelocity.x > moveThreshold || horizontalVelocity.x < -moveThreshold || horizontalVelocity.z > moveThreshold || horizontalVelocity.z < -moveThreshold) || (px != 0f || pz != 0f))
             {
                 isMove = true;
             }

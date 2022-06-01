@@ -48,6 +48,11 @@ public class World : MonoBehaviour
         }
     }
 
+    internal void LoadAdditionalChunksRequest(GameObject player)
+    {
+        Debug.Log("LoadMoreChunks called");
+    }
+
     private void GenerateVoxels(ChunkData data)
     {
       

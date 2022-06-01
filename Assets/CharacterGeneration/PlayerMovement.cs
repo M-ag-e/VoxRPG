@@ -19,8 +19,9 @@ public class PlayerMovement : MonoBehaviour
     float turnSmoothVelocity;
     public float turnSmoothTime = 0.1f;
 
-    public float rayDistance;
 
+    public float collisionRayDistance;
+    
 
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         //jump
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, rayDistance, groundMask);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, collisionRayDistance, groundMask);
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -73,6 +74,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, Vector3.down * rayDistance);
+        Gizmos.DrawRay(transform.position, Vector3.down * collisionRayDistance);
     }
 }
