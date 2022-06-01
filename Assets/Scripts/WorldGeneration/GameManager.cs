@@ -1,10 +1,10 @@
+using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
-using System;
 
-public class PlayerGameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
     private GameObject player;
@@ -13,43 +13,47 @@ public class PlayerGameManager : MonoBehaviour
 
     public World world;
 
-    public float dectectionTime = 1;
-    public CinemachineVirtualCamera cameraVM;
+    public float detectionTime = 1;
 
     public void SpawnPlayer()
     {
         if (player != null)
             return;
-        Vector3Int raycastStartPoint = new Vector3Int(world.chunkSize / 2, 100, world.chunkSize / 2);
-        RaycastHit Hit;
-        if (Physics.Raycast(raycastStartPoint, Vector3.down, out Hit, 120))
+        Vector3Int raycastStartposition = new Vector3Int(world.chunkSize / 2, 100, world.chunkSize / 2);
+        RaycastHit hit;
+        if (Physics.Raycast(raycastStartposition, Vector3.down, out hit, 120))
         {
-            player = Instantiate(playerPrefab, Hit.point + Vector3Int.up, Quaternion.identity);
-            cameraVM.Follow = player.transform.GetChild(0);
+
+            player = Instantiate(playerPrefab, hit.point + Vector3Int.up, Quaternion.identity);
             StartCheckingTheMap();
         }
     }
 
-    private void StartCheckingTheMap()
+    public void StartCheckingTheMap()
     {
         SetCurrentChunkCoordinates();
         StopAllCoroutines();
         StartCoroutine(CheckIfShouldLoadNextPosition());
     }
+
     IEnumerator CheckIfShouldLoadNextPosition()
     {
-        yield return new WaitForSeconds(dectectionTime);
-        if(Mathf.Abs(currentChunkCenter.x - player.transform.position.x) > world.chunkSize ||
-           Mathf.Abs(currentChunkCenter.z - player.transform.position.z) > world.chunkSize ||
-           Mathf.Abs(currentPlayerChunkPosition.y - player.transform.position.y) > world.chunkHeight)
+        yield return new WaitForSeconds(detectionTime);
+        if (
+            Mathf.Abs(currentChunkCenter.x - player.transform.position.x) > world.chunkSize ||
+            Mathf.Abs(currentChunkCenter.z - player.transform.position.z) > world.chunkSize ||
+            (Mathf.Abs(currentPlayerChunkPosition.y - player.transform.position.y) > world.chunkHeight)
+            )
         {
             world.LoadAdditionalChunksRequest(player);
+
         }
         else
         {
             StartCoroutine(CheckIfShouldLoadNextPosition());
         }
     }
+
     private void SetCurrentChunkCoordinates()
     {
         currentPlayerChunkPosition = WorldDataHelper.ChunkPositionFromBlockCoords(world, Vector3Int.RoundToInt(player.transform.position));
