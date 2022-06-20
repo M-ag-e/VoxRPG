@@ -7,4 +7,5 @@ using WeaponTypesNameSpace;
 public class RangedWeaponData : WeaponManager
 {
     public RangedWeapon WeaponType;
+    public DamageTypes DamageType;
 }

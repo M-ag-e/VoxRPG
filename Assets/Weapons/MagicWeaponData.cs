@@ -7,4 +7,5 @@ using WeaponTypesNameSpace;
 public class MagicWeaponData : WeaponManager
 {
     public MagicWeapon WeaponType;
+    public DamageTypes DamageType;
 }

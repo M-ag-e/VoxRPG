@@ -7,4 +7,5 @@ using WeaponTypesNameSpace;
 public class MeleeWeaponData : WeaponManager
 {
     public MeleeWeapon WeaponType;
+    public DamageTypes DamageType;
 }
