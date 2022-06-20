@@ -26,17 +26,20 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public Vector3 moveDir;
     public Vector3 tempDir;
+    private float velocityABSX, velocityABSZ, velocityABS; //Debug Values
 
 
     // Update is called once per frame
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        
     }
     void Update()
     {
-        
+        velocityABSX = Mathf.Abs(controller.velocity.x);
+        velocityABSZ = Mathf.Abs(controller.velocity.z);
+        velocityABS = (velocityABSX + velocityABSZ);
         // Do lean amount in the update function, so that its calculated when the player moves
         //gravity
         velocity.y += gravity * Time.deltaTime;
@@ -106,6 +109,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 150, 50), "player movement = " + controller, "box");
+        GUI.Label(new Rect(0, 0, 250, 20), "PlayerMovementXZ ABS = " + velocityABS, "box");
     }
 }

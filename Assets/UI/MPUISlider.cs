@@ -2,28 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class MPUISlider : MonoBehaviour
 {
     public Slider sliderAmount;
-
-    public void SetMaxMPUI(int maxMP)
+    public TMP_Text sliderText;
+    private float MPMax = 0, CurrentMP = 0;
+    public void SetMaxMPUI(float maxMP)
     {
         sliderAmount.maxValue = maxMP;
+        MPMax = maxMP;
+        UpdateText();
     }
 
-    public void UpdateMPUI(bool addMP, float amount)
+
+
+    public void UpdateMPUI(int MPChange, float amount)
     {
-        if (addMP)
+        switch (MPChange) // 1 set // 2 add // 3 minus
         {
-            sliderAmount.value += amount;
+            case 1:
+                sliderAmount.value = amount;
+                CurrentMP = amount;
+                break;
+            case 2:
+                sliderAmount.value += amount;
+                CurrentMP += amount;
+                break;
+            case 3:
+                sliderAmount.value -= amount;
+                CurrentMP -= amount;
+                break;
         }
-        else
-        {
-            sliderAmount.value -= amount;
-        }
+        UpdateText();
     }
-
+    private void UpdateText()
+    {
+        sliderText.text = CurrentMP + " / " + MPMax;
+    }
 
 
 }

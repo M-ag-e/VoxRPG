@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f640c65250edf64f86b092fb50f65ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Next: {fileID: 0}
+  Next: {fileID: 542078431}
   undergroundBlockType: 3
 --- !u!4 &542078432
 Transform:

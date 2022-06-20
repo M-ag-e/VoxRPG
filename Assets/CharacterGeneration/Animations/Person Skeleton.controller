@@ -99,13 +99,13 @@ AnimatorStateMachine:
     m_Position: {x: 380, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5126844552840935317}
-    m_Position: {x: 380, y: 360, z: 0}
+    m_Position: {x: 680, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5236001747423642927}
-    m_Position: {x: 80, y: 220, z: 0}
+    m_Position: {x: 380, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7739642536889345857}
-    m_Position: {x: 550, y: 220, z: 0}
+    m_Position: {x: 680, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -171,8 +171,8 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: New Trigger
-    m_Type: 9
+  - m_Name: velocity
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -260,9 +260,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.35506362
-  m_TransitionOffset: 0.08656684
-  m_ExitTime: 0.20993935
+  m_TransitionDuration: 0.27714628
+  m_TransitionOffset: 0.02125754
+  m_ExitTime: 0.07932076
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -374,10 +374,10 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: dc5b3330c268cef4fa9ff2216e095b7f, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: velocity
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: velocity
 --- !u!1102 &7739642536889345857
 AnimatorState:
   serializedVersion: 6
