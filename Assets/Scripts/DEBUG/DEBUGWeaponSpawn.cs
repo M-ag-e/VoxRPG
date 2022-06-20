@@ -61,6 +61,7 @@ public class DEBUGWeaponSpawn : EditorWindow
         DrawLayouts();
         DrawHeader();
         DrawBody();
+        
     }
     private void DrawLayouts()
     {
@@ -153,18 +154,26 @@ public class DEBUGWeaponSpawn : EditorWindow
                 }
                 break;
             
-        }
+                
 
+        }
+        
         GUILayout.EndArea();
 
+    }
+    public static void CloseDEBUGWindow()
+    {
+        DEBUGWeaponSpawn window = (DEBUGWeaponSpawn)GetWindow(typeof(DEBUGWeaponSpawn));
+        window.Close();
     }
     public class GeneralSettings : EditorWindow
     {
         public enum SettingsType
         {
-            Magic, 
-            Melee, 
-            Ranged
+            Magic,
+            Melee,
+            Ranged,
+            Invalid,
         }
         static SettingsType dataSettings;
         static GeneralSettings window;
@@ -181,13 +190,13 @@ public class DEBUGWeaponSpawn : EditorWindow
             switch (dataSettings)
             {
                 case SettingsType.Magic:
-                    DrawSettings((WeaponManager)DEBUGWeaponSpawn.MagicWeaponInfo);
+                    DrawSettings(MagicWeaponInfo);
                     break;
                 case SettingsType.Melee:
-                    DrawSettings((WeaponManager)DEBUGWeaponSpawn.MeleeWeaponInfo);
+                    DrawSettings(MeleeWeaponInfo);
                     break;
                 case SettingsType.Ranged:
-                    DrawSettings((WeaponManager)DEBUGWeaponSpawn.RangedWeaponInfo);
+                    DrawSettings(RangedWeaponInfo);
                     break;
             }
         }
@@ -196,7 +205,7 @@ public class DEBUGWeaponSpawn : EditorWindow
             GUILayout.Label("##### Weapon Stats #####");
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Prefab      ");
-            weaponData.prefab = (GameObject)EditorGUILayout.ObjectField(weaponData.prefab,typeof(GameObject),false);
+            weaponData.prefab = (GameObject)EditorGUILayout.ObjectField(weaponData.prefab, typeof(GameObject), false);
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.BeginHorizontal();
@@ -238,6 +247,93 @@ public class DEBUGWeaponSpawn : EditorWindow
             GUILayout.Label("Name      ");
             weaponData.WeaponName = EditorGUILayout.TextField(weaponData.WeaponName);
             EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Pallete      ");
+            weaponData.Pallete = (Pallete)EditorGUILayout.EnumPopup(weaponData.Pallete);
+            EditorGUILayout.EndHorizontal();
+
+
+
+            if (weaponData.prefab == null)
+            {
+                EditorGUILayout.HelpBox("This weapon is missing a Prefab! it cannot be generated!", MessageType.Warning);
+            }
+            else if (weaponData.WeaponName == null || weaponData.WeaponName.Length < 1)
+            {
+                EditorGUILayout.HelpBox("This weapon is missing a Name! it cannot be generated!", MessageType.Warning);
+            }
+            else if (GUILayout.Button("Finish and Save", GUILayout.Height(30)))
+            {
+                SaveWeaponData();
+
+                window.DiscardChanges();
+                window.Close();
+                CloseDEBUGWindow();
+            }
+        }
+        void SaveWeaponData()
+        {
+            string prefabPath;
+            string newPrefabPath = "Assets/Weapons/GeneratedData/Prefabs/";
+            string dataPath = "Assets/Weapons/GeneratedData/WeaponData/";
+
+            switch (dataSettings)
+            {
+                case SettingsType.Magic:
+                    dataPath += "Magic/" + DEBUGWeaponSpawn.MagicWeaponInfo.WeaponName + ".asset";
+                    AssetDatabase.Refresh();
+                    AssetDatabase.CreateAsset(DEBUGWeaponSpawn.MagicWeaponInfo, dataPath);
+                    newPrefabPath += "Magic/" + DEBUGWeaponSpawn.MagicWeaponInfo.WeaponName + ".prefab";
+                    prefabPath = AssetDatabase.GetAssetPath(DEBUGWeaponSpawn.MagicWeaponInfo.prefab);
+                    AssetDatabase.CopyAsset(prefabPath, newPrefabPath);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    GameObject magicPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
+                    if (!magicPrefab.GetComponent<MagicWeapons>())
+                    {
+                        magicPrefab.AddComponent(typeof(MagicWeapons));
+                    }
+                    magicPrefab.GetComponent<MagicWeapons>().magicWpnData = DEBUGWeaponSpawn.MagicWeaponInfo;
+                    dataSettings = SettingsType.Invalid;
+                    break;
+
+                case SettingsType.Melee:
+                    dataPath += "Melee/" + DEBUGWeaponSpawn.MeleeWeaponInfo.WeaponName + ".asset";
+                    AssetDatabase.CreateAsset(MeleeWeaponInfo, dataPath);
+                    newPrefabPath += "Melee/" + DEBUGWeaponSpawn.MeleeWeaponInfo.WeaponName + ".prefab";
+                    prefabPath = AssetDatabase.GetAssetPath(DEBUGWeaponSpawn.MeleeWeaponInfo.prefab);
+                    AssetDatabase.CopyAsset(prefabPath, newPrefabPath);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    GameObject meleePrefab = (GameObject)AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
+                    if (!meleePrefab.GetComponent<MeleeWeapons>())
+                    {
+                        meleePrefab.AddComponent(typeof(MeleeWeapons));
+                    }
+                    meleePrefab.GetComponent<MeleeWeapons>().meleeWpnData = DEBUGWeaponSpawn.MeleeWeaponInfo;
+                    dataSettings = SettingsType.Invalid;
+                    break;
+
+                case SettingsType.Ranged:
+                    dataPath += "Ranged/" + DEBUGWeaponSpawn.RangedWeaponInfo.WeaponName + ".asset";
+                    AssetDatabase.CreateAsset(RangedWeaponInfo, dataPath);
+                    newPrefabPath += "Ranged/" + DEBUGWeaponSpawn.RangedWeaponInfo.WeaponName + ".prefab";
+                    prefabPath = AssetDatabase.GetAssetPath(DEBUGWeaponSpawn.RangedWeaponInfo.prefab);
+                    AssetDatabase.CopyAsset(prefabPath, newPrefabPath);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    GameObject rangedPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
+                    if (!rangedPrefab.GetComponent<RangedWeapons>())
+                    {
+                        rangedPrefab.AddComponent(typeof(RangedWeapons));
+                    }
+                    rangedPrefab.GetComponent<RangedWeapons>().rangedWpnData = DEBUGWeaponSpawn.RangedWeaponInfo;
+                    dataSettings = SettingsType.Invalid;
+                    break;
+            }
+
+            Debug.Log("Weapon Creation Complete!");
         }
     }
 }

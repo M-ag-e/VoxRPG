@@ -7,13 +7,15 @@ namespace WeaponTypesNameSpace
     {
         MagicStaff,
         MagicWand,
-        MagicBook
+        MagicBook,
+        MagicSigil
     }
     public enum MeleeWeapon {
         MeleeSword,
         MeleeBigsword,
         MeleeBlunt,
-        MeleeDaggers
+        MeleeDaggers,
+        MeleeFists
     }
     public enum RangedWeapon {
         RangedBow,

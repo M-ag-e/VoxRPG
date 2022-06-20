@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0e59928af89994394bdf9545e94217, type: 3}
+  m_Name: Starter Sword
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4612988712142626469, guid: 45e19a112c7d7734ea0f2a91eb148d40, type: 3}
+  WeaponDMG: 2
+  WeaponMP: 5
+  WeaponSTRReq: 0
+  WeaponMAGReq: 0
+  WeaponINTReq: 0
+  WeaponFireRate: 0.5
+  WeaponLvl: 0
+  WeaponName: Starter Sword
+  Pallete: 0
+  WeaponType: 0
+  DamageType: 4

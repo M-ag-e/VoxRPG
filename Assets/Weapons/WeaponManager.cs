@@ -8,5 +8,5 @@ public class WeaponManager : ScriptableObject
     public float WeaponDMG, WeaponMP, WeaponSTRReq, WeaponMAGReq, WeaponINTReq, WeaponFireRate;
     public int WeaponLvl;
     public string WeaponName;
-    public bool hasSpawned = false;
+    public Pallete Pallete;
 }
